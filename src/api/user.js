@@ -11,9 +11,9 @@ export function login({ username, password }) {
   })
 }
 
-export function getInfo(token) {
+export function getSidebar() {
   return request({
-    url: `/admin/user/${token}`,
+    url: `/admin/passport/module`,
     method: 'get'
   })
 }
@@ -24,3 +24,4 @@ export function logout() {
     method: 'post'
   })
 }
+
