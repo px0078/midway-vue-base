@@ -1,11 +1,12 @@
 import { login, logout, getSidebar } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
+import avatarImage from '@/assets/image/avatar.png'
 
 const state = {
   token: getToken(),
   name: '',
-  avatar: '',
+  avatar: avatarImage,
   roles: [],
   id: '',
   account: '',
@@ -45,7 +46,7 @@ const actions = {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password }).then(response => {
-        const { id, name, roles, token, avatar = '', account } = response.result
+        const { id, name, roles, token, avatar = '', account } = response
         commit('SET_TOKEN', token)
         commit('SET_NAME', name)
         commit('SET_AVATAR', avatar)
