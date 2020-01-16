@@ -46,7 +46,6 @@
     <TableView
       :data="userList"
       :columns="columns"
-      :loading="loadingState.getUsers"
       border
       class="users-table"
     >
@@ -60,19 +59,19 @@
           type="primary"
           size="mini"
           @click="handleEditRoles(row)"
-        >{{ $t('operation.edit') + $t('permission.role') }}</el-button>
+        >编辑角色</el-button>
         <el-button
           v-permission="['auth.user.edit', 'auth.user.setPassword', 'auth.user.update']"
           type="primary"
           size="mini"
           @click="handleEdit(row)"
-        >{{ $t('operation.edit') }}</el-button>
+        >编辑</el-button>
         <el-button
           v-permission="['auth.user.destroy']"
           type="danger"
           size="mini"
           @click="handleDelete(row, index)"
-        >{{ $t('operation.delete') }}</el-button>
+        >删除</el-button>
         <el-button
           v-permission="['auth.user.authorization']"
           type="primary"
@@ -161,14 +160,12 @@
           type="danger"
           @click="dialogVisible = false"
         >
-          {{
-            $t('operation.cancel')
-          }}
+          取消
         </el-button>
         <el-button
           type="primary"
           @click="confirmUser()"
-        >{{ $t('operation.confirm') }}</el-button>
+        >确认</el-button>
       </div>
     </el-dialog>
 
@@ -191,17 +188,13 @@
           type="danger"
           @click="roleDialogVisible = false"
         >
-          {{
-            $t('operation.cancel')
-          }}
+          取消
         </el-button>
         <el-button
           type="primary"
           @click="confirmUserRole()"
         >
-          {{
-            $t('operation.confirm')
-          }}
+          确认
         </el-button>
       </div>
     </el-dialog>
@@ -321,7 +314,6 @@ const generateTransferData = data => {
 
 export default {
   name: 'UserManage',
-  useLoading: true,
   components: { TableView, Pagination },
 
   data: () => ({

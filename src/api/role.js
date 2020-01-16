@@ -9,7 +9,7 @@ export function getRoutes() {
 
 export function getRoles() {
   return request({
-    url: '/roles',
+    url: '/admin/group',
     method: 'get'
   })
 }

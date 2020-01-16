@@ -1,15 +1,15 @@
 import store from '@/store'
 
 export default {
-  inserted(el, binding, vnode) {
+  async inserted(el, binding, vnode) {
     const { value } = binding
-    const roles = store.getters && store.getters.roles
-
+    await store.dispatch('user/getSidebar')
+    const uris = store.state.user.modules
     if (value && value instanceof Array && value.length > 0) {
-      const permissionRoles = value
+      const permissionUri = value
 
-      const hasPermission = roles.some(role => {
-        return permissionRoles.includes(role)
+      const hasPermission = permissionUri.some(uri => {
+        return uris.includes(uri)
       })
 
       if (!hasPermission) {

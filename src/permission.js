@@ -39,7 +39,6 @@ router.beforeEach(async(to, from, next) => {
           // await store.dispatch('user/getInfo')
           // 获取用户可访问的模块
           const sidebar = await store.dispatch('user/getSidebar')
-          console.log('123', sidebar)
 
           // 根据模块生成左侧的路由
           const accessRoutes = await store.dispatch(

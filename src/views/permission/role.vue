@@ -4,11 +4,10 @@
       v-permission="['auth.group.create']"
       type="primary"
       @click="handleAddRole"
-    >{{ $t('permission.addRole') }}</el-button>
+    >添加角色</el-button>
     <TableView
       :data="rolesList"
       :columns="columns"
-      :loading="loadingState.getRoles"
       border
       class="roles-table"
     >
@@ -18,13 +17,13 @@
           type="primary"
           size="small"
           @click="handleEdit(row)"
-        >{{ $t('operation.edit') }}</el-button>
+        >编辑</el-button>
         <el-button
           v-permission="['auth.group.destroy']"
           type="danger"
           size="small"
           @click="handleDelete(row, index)"
-        >{{ $t('operation.delete') }}</el-button>
+        >删除</el-button>
         <el-button
           v-permission="['auth.group.getUser']"
           type="primary"
@@ -97,11 +96,11 @@
         <el-button
           type="danger"
           @click="dialogVisible = false"
-        >{{ $t('operation.cancel') }}</el-button>
+        >取消</el-button>
         <el-button
           type="primary"
           @click="confirmRole()"
-        >{{ $t('operation.confirm') }}</el-button>
+        >确认</el-button>
       </div>
     </el-dialog>
 
@@ -174,7 +173,6 @@ const submitRules = {
 
 export default {
   name: 'RoleManage',
-  useLoading: true,
   components: { TableView, Pagination, UserDialog },
   data: () => ({
     columns,
@@ -232,10 +230,6 @@ export default {
     handlePageChange() {
       this.getRoles()
     },
-
-    // handleUserPageChange() {
-    //   this.getUser();
-    // },
 
     async handleDelete(row, index) {
       await this.$confirm('确定要删除这个角色吗？', '警告', {

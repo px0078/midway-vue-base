@@ -25,3 +25,10 @@ export function logout() {
   })
 }
 
+export function listUser(parmas) {
+  return request({
+    url: '/admin/user',
+    method: 'get',
+    parmas
+  })
+}

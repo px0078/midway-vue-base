@@ -62,44 +62,19 @@ const actions = {
   },
 
   // 获取用户的权限列表
-  getSidebar() {
+  getSidebar({ commit }) {
+    if (state.modules.length) return state.modules
+
     return new Promise(async(resolve, reject) => {
       try {
         const modules = await getSidebar()
+        commit('SET_MODULES', modules)
         resolve(modules)
       } catch (err) {
         reject(err)
       }
     })
   },
-
-  // get user info
-  // getInfo({ commit, state }) {
-  //   return new Promise((resolve, reject) => {
-  //     getInfo(state.id).then(response => {
-  //       const { result: data } = response
-
-  //       if (!data) {
-  //         reject('Verification failed, please Login again.')
-  //       }
-
-  //       const { roles, name, avatar } = data
-
-  //       // roles must be a non-empty array
-  //       if (!roles || roles.length <= 0) {
-  //         reject('getInfo: roles must be a non-null array!')
-  //       }
-
-  //       commit('SET_ROLES', roles)
-  //       commit('SET_NAME', name)
-  //       commit('SET_AVATAR', avatar)
-  //       // commit('SET_INTRODUCTION', introduction)
-  //       resolve(data)
-  //     }).catch(error => {
-  //       reject(error)
-  //     })
-  //   })
-  // },
 
   // user logout
   logout({ commit, state, dispatch }) {

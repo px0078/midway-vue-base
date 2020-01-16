@@ -125,7 +125,6 @@ const submitMenus = {
 
 export default {
   name: 'MenuManage',
-  useLoading: true,
   data: () => ({
     menu,
     submitMenus,

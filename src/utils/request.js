@@ -98,3 +98,19 @@ service.interceptors.response.use(
 )
 
 export default service
+
+export function get(url, data, config = {}) {
+  return service({ url, data, ...config })
+}
+
+export function del(url, data, config = {}) {
+  return service({ url, data, method: 'delete', ...config })
+}
+
+export function post(url, data, config = {}) {
+  return service({ url, data, method: 'post', ...config })
+}
+
+export function put(url, data, config = {}) {
+  return service({ url, data, method: 'put', ...config })
+}
