@@ -2,6 +2,7 @@ import { login, logout, getSidebar } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
 import avatarImage from '@/assets/image/avatar.png'
+import { uniq, compact, flatten } from 'underscore'
 
 const state = {
   token: getToken(),
@@ -10,7 +11,8 @@ const state = {
   roles: [],
   id: '',
   account: '',
-  modules: []
+  modules: [],
+  uri: []
 }
 
 const mutations = {
@@ -37,6 +39,14 @@ const mutations = {
   },
   SET_MODULES: (state, modules) => {
     state.modules = modules
+  },
+  SET_URI(state, menu) {
+    let uri = []
+    menu.map(item => {
+      uri.push(item.uri.split(','))
+    })
+    uri = uniq(compact(flatten(uri)))
+    state.uri = uri
   }
 }
 
@@ -69,6 +79,7 @@ const actions = {
       try {
         const modules = await getSidebar()
         commit('SET_MODULES', modules)
+        commit('SET_URI', modules)
         resolve(modules)
       } catch (err) {
         reject(err)

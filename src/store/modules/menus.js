@@ -36,7 +36,7 @@ const actions = {
 }
 
 function listMenuToTree(arr) {
-  const map = arr.reduce((acc, cur) => ({ ...acc, [cur.id]: cur }), {})
+  const map = arr.reduce((acc, cur) => ({ ...acc, [cur._id]: cur }), {})
   const tree = []
   arr.forEach(item => {
     const parentItem = map[item.parent_id]

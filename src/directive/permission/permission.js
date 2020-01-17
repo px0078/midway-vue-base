@@ -4,7 +4,7 @@ export default {
   async inserted(el, binding, vnode) {
     const { value } = binding
     await store.dispatch('user/getSidebar')
-    const uris = store.state.user.modules
+    const uris = store.state.user.uri
     if (value && value instanceof Array && value.length > 0) {
       const permissionUri = value
 
