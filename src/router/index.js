@@ -125,7 +125,7 @@ export const asyncRoutes = [
         name: 'authorization',
         meta: {
           icon: 'password',
-          title: 'authorization',
+          title: '权限管理',
           uri: 'auth.auth'
         }
       }

@@ -16,13 +16,13 @@
       <span slot-scope="{ node, data }" class="custom-tree-node">
         <span>{{ node.label }}</span>
         <span>
-          <el-button v-if="data.id !== -1" v-permission="['auth.module.edit']" type="text" size="small" title="编辑" @click="() => edit(data)">
+          <el-button v-if="data._id !== -1" v-permission="['auth.module.edit']" type="text" size="small" title="编辑" @click="() => edit(data)">
             <i class="el-icon-edit" />
           </el-button>
           <el-button v-permission="['auth.module.create']" type="text" size="small" title="添加子菜单" @click="() => append(data)">
             <i class="el-icon-plus" />
           </el-button>
-          <el-button v-if="data.id !== -1" v-permission="['auth.module.destroy']" type="text" size="small" title="删除该项菜单及所有子菜单" @click="() => handleDelete(node, data)">
+          <el-button v-if="data._id !== -1" v-permission="['auth.module.destroy']" type="text" size="small" title="删除该项菜单及所有子菜单" @click="() => handleDelete(node, data)">
             <i class="el-icon-minus" />
           </el-button>
         </span>
@@ -151,7 +151,7 @@ export default {
 
     append(data) {
       this.menu = { ...menu }
-      this.menu.parent_id = data.id
+      this.menu.parent_id = data._id
 
       this.dialogType = 'new'
       this.dialogVisible = true
@@ -173,18 +173,18 @@ export default {
     async handleDrop(from, to, dropType) {
       let data
       if (dropType === 'inner') {
-        // 拖到了 to 的里面，parent_id 就是 to.data.id
+        // 拖到了 to 的里面，parent_id 就是 to.data._id
         data = {
           name: from.data.name,
-          id: from.data.id,
-          parent_id: to.data.id
+          id: from.data._id,
+          parent_id: to.data._id
         }
       } else if (dropType === 'after' || dropType === 'before') {
-        // 拖到了 to 的前面或后面，平级，parent_id 就是 to.parent.data.id
+        // 拖到了 to 的前面或后面，平级，parent_id 就是 to.parent.data._id
         data = {
           name: from.data.name,
-          id: from.data.id,
-          parent_id: to.parent.data.id
+          id: from.data._id,
+          parent_id: to.parent.data._id
         }
       }
       if (data.parent_id === -1) data.parent_id = ''
@@ -235,7 +235,7 @@ export default {
         type: 'warning'
       })
       await delMenus({
-        id: data.id
+        id: data._id
       })
       this.getMenus(true)
       this.$message({

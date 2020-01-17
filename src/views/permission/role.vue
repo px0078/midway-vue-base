@@ -85,7 +85,7 @@
               :data="menu"
               show-checkbox
               default-expand-all
-              node-key="id"
+              node-key="_id"
               highlight-current
               :props="{ label: 'name', children: 'children' }"
             />
@@ -212,8 +212,8 @@ export default {
       this.total = total
     },
     async getRoleMenuIds(roleId) {
-      const { list } = await getRoleMenu(roleId)
-      this.$refs.tree.setCheckedKeys(list)
+      const { modules } = await getRoleMenu(roleId)
+      this.$refs.tree.setCheckedKeys(modules)
     },
     handleAddRole() {
       this.role = getDefaultRole()
@@ -224,7 +224,7 @@ export default {
       this.dialogType = 'edit'
       this.dialogVisible = true
       this.role = { ...row }
-      this.getRoleMenuIds(row.id)
+      this.getRoleMenuIds(row._id)
     },
 
     handlePageChange() {
@@ -237,7 +237,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       })
-      await deleteRole(row.id)
+      await deleteRole(row._id)
       this.rolesList.splice(index, 1)
       this.$message({
         type: 'success',
@@ -252,9 +252,9 @@ export default {
         this.$refs.tree.getHalfCheckedKeys(),
       )
       if (isEdit) {
-        await updateRole(this.role.id, this.role)
+        await updateRole(this.role._id, this.role)
         this.rolesList.some(role => {
-          if (this.role.id === role.id) {
+          if (this.role._id === role._id) {
             Object.assign(role, this.role)
             return true
           }
@@ -273,8 +273,8 @@ export default {
     },
 
     handleUsers(row) {
-      const { id } = row
-      this.userDialogId = id
+      const { _id } = row
+      this.userDialogId = _id
       this.$refs['user-dialog'].dialogVisible = true
     }
   }

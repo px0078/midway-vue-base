@@ -9,12 +9,12 @@ export function delMenus(data) {
 }
 
 export function updateMenus(data) {
-  const { id, ...params } = data
-  return put(`/admin/module/${id}`, params)
+  const { _id, ...params } = data
+  return put(`/admin/module/${_id}`, params)
 }
 
 export function getMenusDetail(data) {
-  return get(`/admin/module/${data.id}`)
+  return get(`/admin/module/${data._id}`)
 }
 
 export function addMenus(data) {

@@ -40,17 +40,17 @@
               >拥有该功能的用户</span>
             </div>
           </template>
-          <template v-else-if="assignList[data.id]">
+          <template v-else-if="assignList[data._id]">
             <div
               class="flex flex-middle"
               style="width: 100%;"
             >
-              <span class="roles font-hidden-1">{{ assignList[data.id].role.join('、') }}</span>
+              <span class="roles font-hidden-1">{{ assignList[data._id].role.join('、') }}</span>
               <span
                 class="flex-none"
                 style="width: 160px; color: rgb(24, 144, 255);"
-                @click="handleClickUser(assignList[data.id].user)"
-              >{{ assignList[data.id].user.length }}</span>
+                @click="handleClickUser(assignList[data._id].user)"
+              >{{ assignList[data._id].user.length }}</span>
             </div>
           </template>
         </span>
@@ -108,6 +108,7 @@ export default {
     },
 
     handleClickUser(ids) {
+      console.log('123', ids)
       this.userDialogId = ids
       this.$refs['user-dialog'].dialogVisible = true
     }

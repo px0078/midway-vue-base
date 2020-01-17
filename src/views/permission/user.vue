@@ -1,6 +1,10 @@
 <template>
   <div class="app-container">
     <div class="navigator">
+      <div style="margin-bottom: 30px;">
+        <el-button type="primary" @click="handleCreateUser">添加用户</el-button>
+      </div>
+
       <el-row :gutter="20">
         <el-col
           :span="8"
@@ -210,8 +214,9 @@
           ref="tree"
           :data="menu"
           default-expand-all
+          :check-strictly="true"
           show-checkbox
-          node-key="id"
+          node-key="_id"
           highlight-current
           :props="{ label: 'name', children: 'children' }"
           @check="handleNodeClick"
@@ -304,7 +309,7 @@ const generateTransferData = data => {
   const newArray = []
   data.forEach(item => {
     newArray.push({
-      key: item.id,
+      key: item._id,
       label: item.name,
       ...item
     })
@@ -361,10 +366,10 @@ export default {
           message: '修改用户成功'
         })
         this.userList.some((item, index) => {
-          if (item.id === this.user.id) {
+          if (item._id === this.user._id) {
             this.userList.splice(index, 1, this.user)
           }
-          return item.id === this.user.id
+          return item._id === this.user._id
         })
       } else {
         await addUser(this.user)
@@ -381,14 +386,14 @@ export default {
     async confirmUserRole() {
       const { sourceData, targetData } = this.$refs.transfer
       const add = targetData.map(item => addRoleUser({
-        id: item.id,
+        id: item._id,
         type: 'add',
-        idList: [this.user.id]
+        idList: [this.user._id]
       }))
       const reduce = sourceData.map(item => addRoleUser({
-        id: item.id,
+        id: item._id,
         type: 'remove',
-        idList: [this.user.id]
+        idList: [this.user._id]
       }))
       Promise.all([...add, ...reduce]).then(() => {
         this.$message({
@@ -411,7 +416,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       })
-      await deleteUser(row.id)
+      await deleteUser(row._id)
       this.userList.splice(index, 1)
       this.$message({
         type: 'success',
@@ -433,13 +438,13 @@ export default {
         pageSize: 1000
       })
       // 这里是查询所选用户的角色。
-      const { roles: userRoles } = await getUserDetail(row.id)
+      const { roles: userRoles } = await getUserDetail(row._id)
       // eslint-disable-next-line no-underscore-dangle
       const _array = []
       list.forEach(item => userRoles.forEach(role => {
         const hasRole = item.name === role
         if (hasRole) {
-          _array.push(item.id)
+          _array.push(item._id)
         }
         return hasRole
       }))
@@ -487,12 +492,11 @@ export default {
     async handleAuthorization(row) {
       this.userAuthVisible = true
       this.$store.dispatch('menus/getMenu')
-      const { id, name } = row
+      const { _id, name } = row
       const result = await getAuth({
-        id
+        _id
       })
       this.userAuthTitle = `${name}的权限表`
-      // eslint-disable-next-line no-underscore-dangle
       this.userAuthData = result.map(i => i._id)
       setTimeout(() => {
         this.$refs.tree.setCheckedKeys(this.userAuthData)
@@ -501,6 +505,12 @@ export default {
 
     handleNodeClick() {
       this.$refs.tree.setCheckedKeys(this.userAuthData)
+    },
+
+    handleCreateUser() {
+      this.dialogType = 'new'
+      this.dialogVisible = true
+      this.user = UserShema
     }
   }
 }
