@@ -58,7 +58,7 @@
     </el-dialog>
 
     <!-- 菜单导入导出按钮 -->
-    <div class="menus-button">
+    <!-- <div class="menus-button">
       <el-button v-permission="['auth.module.import']" size="mini" @click="importMenus">导入菜单</el-button>
       <template v-if="showCheckbox">
         <el-button size="mini" type="danger" @click="exportCancel">取消</el-button>
@@ -68,7 +68,7 @@
         <el-button v-permission="['auth.module.export']" size="mini" @click="showCheckbox = true">导出菜单</el-button>
       </template>
       <input ref="importFile" class="hidden" type="file" accept="text/plain" @change="handleInputChange">
-    </div>
+    </div> -->
 
   </div>
 </template>
@@ -79,11 +79,9 @@ import _ from 'underscore'
 import {
   delMenus,
   updateMenus,
-  addMenus,
-  exportMenus,
-  importMenus
+  addMenus
 } from '@/api/menu.js'
-import { idValidator, downloadFile } from '@/utils'
+import { idValidator } from '@/utils'
 
 const menu = {
   name: '',
@@ -250,33 +248,33 @@ export default {
         this.handleEdit()
       }
       this.dialogVisible = false
-    },
-    async exportMenus() {
-      const keys = _.compact(this.$refs.tree.getCheckedKeys().map(item => {
-        if (item !== -1) return item
-      }))
-      const result = await exportMenus({
-        ids: keys
-      })
-      downloadFile(result, 'export_menus.txt')
-      this.exportCancel()
-    },
-    async exportCancel() {
-      this.$refs.tree.setCheckedKeys([])
-      this.showCheckbox = false
-    },
-    async importMenus() {
-      this.$refs.importFile.click()
-    },
-    async handleInputChange(evt) {
-      const file = evt.target.files[0]
-      await importMenus(file)
-      this.getMenus(true)
-      this.$message({
-        type: 'success',
-        message: '成功导入'
-      })
     }
+    // async exportMenus() {
+    //   const keys = _.compact(this.$refs.tree.getCheckedKeys().map(item => {
+    //     if (item !== -1) return item
+    //   }))
+    //   const result = await exportMenus({
+    //     ids: keys
+    //   })
+    //   downloadFile(result, 'export_menus.txt')
+    //   this.exportCancel()
+    // },
+    // async exportCancel() {
+    //   this.$refs.tree.setCheckedKeys([])
+    //   this.showCheckbox = false
+    // },
+    // async importMenus() {
+    //   this.$refs.importFile.click()
+    // },
+    // async handleInputChange(evt) {
+    //   const file = evt.target.files[0]
+    //   await importMenus(file)
+    //   this.getMenus(true)
+    //   this.$message({
+    //     type: 'success',
+    //     message: '成功导入'
+    //   })
+    // }
   }
 }
 </script>
