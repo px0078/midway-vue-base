@@ -85,7 +85,7 @@ export const asyncRoutes = [
     meta: {
       title: '系统权限',
       icon: 'lock',
-      uri: 'auth'
+      uri: 'system.auth'
     },
     children: [
       {
@@ -95,7 +95,7 @@ export const asyncRoutes = [
         meta: {
           icon: 'peoples',
           title: '角色管理',
-          uri: 'auth.group'
+          uri: 'system.auth.group'
         }
       },
       {
@@ -105,7 +105,7 @@ export const asyncRoutes = [
         meta: {
           icon: 'tree-table',
           title: '菜单管理',
-          uri: 'auth.module'
+          uri: 'system.auth.module'
         }
       },
       {
@@ -115,7 +115,7 @@ export const asyncRoutes = [
         meta: {
           icon: 'user',
           title: '用户管理',
-          uri: 'auth.user'
+          uri: 'system.auth.user'
         }
       },
       {
@@ -126,7 +126,7 @@ export const asyncRoutes = [
         meta: {
           icon: 'password',
           title: '权限管理',
-          uri: 'auth.auth'
+          uri: 'system.auth.auth'
         }
       }
     ]

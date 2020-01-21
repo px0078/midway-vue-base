@@ -95,3 +95,35 @@ export function addUser(data) {
     data
   })
 }
+
+/**
+ * 获取个人信息
+ */
+export function getInfo() {
+  return request({
+    url: `/admin/user/info`,
+    method: 'get'
+  })
+}
+
+/**
+ * 更新个人信息
+ */
+export function setInfo(data) {
+  return request({
+    url: `/admin/user/info`,
+    method: 'post',
+    data
+  })
+}
+
+/**
+ * 更新个人密码
+ */
+export function setPassword(data) {
+  return request({
+    url: `/admin/user/password`,
+    method: 'post',
+    data
+  })
+}

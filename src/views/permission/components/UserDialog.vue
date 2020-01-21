@@ -23,7 +23,7 @@
             />
             <el-option
               :value="2"
-              label="潭州账号"
+              label="账号"
             />
           </el-select>
           <el-input
@@ -80,7 +80,7 @@ import { deleteUser } from '@/api/user'
 const columns = [
   {
     prop: 'account',
-    label: '潭州账号',
+    label: '账号',
     minWidth: 150
   },
   {
@@ -162,13 +162,13 @@ export default {
     handlePageChange() {
       this.getRoleUser()
     },
-    async deleteUser({ id, account }) {
+    async deleteUser({ _id, account }) {
       await this.$confirm(`确定要删除该用户吗？${account}`, '警告', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       })
-      await deleteUser(id)
+      await deleteUser(_id)
       this.getRoleUser()
     }
   }

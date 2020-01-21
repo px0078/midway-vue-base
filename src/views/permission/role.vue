@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <el-button
-      v-permission="['auth.group.create']"
+      v-permission="['group.create']"
       type="primary"
       @click="handleAddRole"
     >添加角色</el-button>
@@ -13,19 +13,19 @@
     >
       <template v-slot="{ row, index }">
         <el-button
-          v-permission="['auth.group.edit']"
+          v-permission="['group.update']"
           type="primary"
           size="small"
           @click="handleEdit(row)"
         >编辑</el-button>
         <el-button
-          v-permission="['auth.group.destroy']"
+          v-permission="['group.destroy']"
           type="danger"
           size="small"
           @click="handleDelete(row, index)"
         >删除</el-button>
         <el-button
-          v-permission="['auth.group.getUser']"
+          v-permission="['group.getUser']"
           type="primary"
           size="small"
           @click="handleUsers(row, index)"

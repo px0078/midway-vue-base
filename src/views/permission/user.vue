@@ -59,25 +59,25 @@
       </template>
       <template v-slot="{ row, index }">
         <el-button
-          v-permission="['auth.user.edit', 'auth.user.update']"
+          v-permission="['user.update']"
           type="primary"
           size="mini"
           @click="handleEditRoles(row)"
         >编辑角色</el-button>
         <el-button
-          v-permission="['auth.user.edit', 'auth.user.setPassword', 'auth.user.update']"
+          v-permission="['user.update', 'user.setPassword']"
           type="primary"
           size="mini"
           @click="handleEdit(row)"
         >编辑</el-button>
         <el-button
-          v-permission="['auth.user.destroy']"
+          v-permission="['user.destroy']"
           type="danger"
           size="mini"
           @click="handleDelete(row, index)"
         >删除</el-button>
         <el-button
-          v-permission="['auth.user.authorization']"
+          v-permission="['user.authorization']"
           type="primary"
           size="mini"
           @click="handleAuthorization(row, index)"

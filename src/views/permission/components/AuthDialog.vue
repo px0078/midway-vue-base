@@ -23,7 +23,7 @@
             />
             <el-option
               :value="2"
-              label="潭州账号"
+              label="账号"
             />
           </el-select>
           <el-input
@@ -70,7 +70,7 @@ import { getUserById } from '@/api/user'
 const columns = [
   {
     prop: 'account',
-    label: '潭州账号',
+    label: '账号',
     minWidth: 150
   },
   {

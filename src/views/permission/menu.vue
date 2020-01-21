@@ -16,13 +16,13 @@
       <span slot-scope="{ node, data }" class="custom-tree-node">
         <span>{{ node.label }}</span>
         <span>
-          <el-button v-if="data._id !== -1" v-permission="['auth.module.edit']" type="text" size="small" title="编辑" @click="() => edit(data)">
+          <el-button v-if="data._id !== -1" v-permission="['module.update']" type="text" size="small" title="编辑" @click="() => edit(data)">
             <i class="el-icon-edit" />
           </el-button>
-          <el-button v-permission="['auth.module.create']" type="text" size="small" title="添加子菜单" @click="() => append(data)">
+          <el-button v-permission="['module.create']" type="text" size="small" title="添加子菜单" @click="() => append(data)">
             <i class="el-icon-plus" />
           </el-button>
-          <el-button v-if="data._id !== -1" v-permission="['auth.module.destroy']" type="text" size="small" title="删除该项菜单及所有子菜单" @click="() => handleDelete(node, data)">
+          <el-button v-if="data._id !== -1" v-permission="['module.destroy']" type="text" size="small" title="删除该项菜单及所有子菜单" @click="() => handleDelete(node, data)">
             <i class="el-icon-minus" />
           </el-button>
         </span>
@@ -37,7 +37,7 @@
     >
       <el-form :ref="formName" :model="menu" label-width="80px" label-position="left" :rules="submitMenus">
         <el-form-item label="菜单名称" prop="name">
-          <el-input v-model="menu.name" placeholder="菜单名称" maxlength="10" />
+          <el-input v-model="menu.name" placeholder="菜单名称" maxlength="14" show-word-limit />
         </el-form-item>
         <el-form-item label="uri路径" prop="uri">
           <el-input v-model="menu.uri" type="textarea" placeholder="接口uri地址" />
@@ -59,13 +59,13 @@
 
     <!-- 菜单导入导出按钮 -->
     <!-- <div class="menus-button">
-      <el-button v-permission="['auth.module.import']" size="mini" @click="importMenus">导入菜单</el-button>
+      <el-button v-permission="['module.import']" size="mini" @click="importMenus">导入菜单</el-button>
       <template v-if="showCheckbox">
         <el-button size="mini" type="danger" @click="exportCancel">取消</el-button>
         <el-button size="mini" type="primary" @click="exportMenus">确定</el-button>
       </template>
       <template v-else>
-        <el-button v-permission="['auth.module.export']" size="mini" @click="showCheckbox = true">导出菜单</el-button>
+        <el-button v-permission="['module.export']" size="mini" @click="showCheckbox = true">导出菜单</el-button>
       </template>
       <input ref="importFile" class="hidden" type="file" accept="text/plain" @change="handleInputChange">
     </div> -->
